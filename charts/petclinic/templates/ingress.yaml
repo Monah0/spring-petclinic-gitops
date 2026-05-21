@@ -4,8 +4,17 @@ kind: Ingress
 metadata:
   name: petclinic
 
+  annotations:
+    cert-manager.io/cluster-issuer: selfsigned
+
 spec:
   ingressClassName: nginx
+
+  tls:
+    - hosts:
+        - {{ .Values.ingress.host }}
+
+      secretName: petclinic-tls
 
   rules:
     - host: {{ .Values.ingress.host }}
