@@ -1,0 +1,20 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+
+metadata:
+  name: petclinic-db
+  namespace: production
+
+spec:
+  instances: 2
+
+  storage:
+    size: 2Gi
+
+  bootstrap:
+    initdb:
+      database: petclinic
+      owner: petclinic
+
+      secret:
+        name: petclinic-db-secret
